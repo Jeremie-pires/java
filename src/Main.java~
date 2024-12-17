@@ -20,7 +20,7 @@ public class Main {
         Game jeu = new Game(t1, t2);
         System.out.println("Stats du joueur 1 : ");
         System.out.println("ATK : "+p1.ATK+"  HP : "+p1.HP);
-        System.out.println("Stats du joueur 2 : ");
+        System.out.println("Stats du joueur 2 : "+);
         System.out.println("ATK : "+p2.ATK+"  HP : "+p2.HP);
         System.out.println("----------------------------------------------------");
         jeu.play();
