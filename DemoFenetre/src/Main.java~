@@ -1,0 +1,31 @@
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        //Créer une fenetre
+        JFrame frame = new JFrame("Demo Graphic");
+        //Taille de la fenetre
+        frame.setSize(800,600);
+        //Bouton pour fermer la fenetre
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Contenu
+        JButton button = new JButton("Je veux devenir riche");
+
+        //Pour ajouter des elements dans la fenetre
+        //Il faut que la fenetre ai au moins un layout
+        //Layout = pour gérer les dispositions des éléments
+        frame.setLayout(new java.awt.FlowLayout());
+
+        //Ajoute le bouton dans le Layout de la fenetre
+        frame.add(button);
+
+        //Créer et ajouter dans le Layout de la fenetre
+        JLabel label = new JLabel("Je suis pauvre = Je suis étudiant");
+        frame.add(label);
+
+
+        //Afficher la fenetre
+        frame.setVisible(true);
+    }
+}

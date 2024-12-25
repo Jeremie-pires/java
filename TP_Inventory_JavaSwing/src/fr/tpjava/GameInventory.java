@@ -1,0 +1,77 @@
+package fr.tpjava;
+
+import fr.tpjava.inventory.Item;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameInventory {
+    public JFrame frame;
+    public DefaultListModel<String> listModel = new DefaultListModel<>();
+    public JList<String> inventory = new JList<>(listModel);
+
+    public GameInventory() {
+        frame = new JFrame("Inventory");
+        frame.setSize(800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel(new GridLayout(3, 1));
+        JButton addButton = new JButton("Ajouter");
+        JButton removeButton = new JButton("Supprimer");
+        JButton displayButton = new JButton("Afficher");
+        JTextField name = new JTextField();
+        JTextField quantity = new JTextField();
+        JPanel panelInput = new JPanel(new GridLayout(1, 2));
+        JPanel panelButton = new JPanel(new GridLayout(1, 2));
+
+        panelInput.add(name);
+        panelInput.add(quantity);
+        panelButton.add(addButton);
+        panelButton.add(removeButton);
+
+        panel.add(panelInput);
+        panel.add(panelButton);
+        panel.add(new JScrollPane(inventory));
+        frame.add(panel);
+        frame.setVisible(true);
+
+        addButton.addActionListener(addButtonEvent -> {
+            if (name.getText().isEmpty() || quantity.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Veuillez remplir tous les champs.");
+                return;
+            }
+            try {
+                String itemName = name.getText();
+                int itemQuantity = Integer.parseInt(quantity.getText());
+                Inventory.addItem(itemName, itemQuantity);
+                updateDisplay();
+                name.setText("");
+                quantity.setText("");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(frame, "Quantité invalide !");
+            }
+        });
+
+        removeButton.addActionListener(removeButtonEvent -> {
+            if (name.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Veuillez entrer un nom d'objet.");
+                return;
+            }
+            String itemName = name.getText();
+            Inventory.removeItem(itemName);
+            updateDisplay();
+            name.setText("");
+        });
+    }
+
+    public void updateDisplay() {
+        listModel.clear();
+        List<String> items = Inventory.displayItems();
+        for (String item : items) {
+            listModel.addElement(item);
+        }
+    }
+
+}
