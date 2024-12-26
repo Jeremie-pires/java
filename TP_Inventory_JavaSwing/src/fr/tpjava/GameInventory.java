@@ -1,7 +1,5 @@
 package fr.tpjava;
 
-import fr.tpjava.inventory.Item;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
